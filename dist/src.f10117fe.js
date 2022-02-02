@@ -158894,9 +158894,7 @@ function () {
         lng: 0
       }
     });
-  } // little bad code
-  // in case if there are many classes like user and company
-  // it may result in a big or statement
+  } // good code - using interface
 
 
   CustomMap.prototype.addMarker = function (mappable) {

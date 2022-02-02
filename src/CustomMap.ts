@@ -1,5 +1,11 @@
-import { User } from "./User";
-import { Company } from "./Company";
+// Instruction to every other class on how hey can be
+// an argument to 'addMarker'
+interface Mappable {
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
 
 export class CustomMap {
   // declaring variables
@@ -16,10 +22,8 @@ export class CustomMap {
     });
   }
 
-  // little bad code
-  // in case if there are many classes like user and company
-  // it may result in a big or statement
-  addMarker(mappable: User | Company): void { //(mappable: User | Company) - only the variables common in both the given types, here position
+  // good code - using interface
+  addMarker(mappable: Mappable): void {
     new google.maps.Marker({
       map: this.googleMap, //on which map to mark
       position: {
@@ -28,17 +32,6 @@ export class CustomMap {
       }
     });
   };
-
-  // addCompanyMarker(company: Company): void {
-  //   new google.maps.Marker({
-  //     map: this.googleMap,
-  //     position: {
-  //       lat: company.location.lat,
-  //       lng: company.location.lng
-  //     }
-  //   });
-  // };
-
 }
 
 // Maps class 
