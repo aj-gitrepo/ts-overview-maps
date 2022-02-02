@@ -158894,28 +158894,17 @@ function () {
         lng: 0
       }
     });
-  } // Bad code
-  // because the code in two functions are similar
+  } // little bad code
+  // in case if there are many classes like user and company
+  // it may result in a big or statement
 
 
-  CustomMap.prototype.addUserMarker = function (user) {
+  CustomMap.prototype.addMarker = function (mappable) {
     new google.maps.Marker({
       map: this.googleMap,
       position: {
-        lat: user.location.lat,
-        lng: user.location.lng
-      }
-    });
-  };
-
-  ;
-
-  CustomMap.prototype.addCompanyMarker = function (company) {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: company.location.lat,
-        lng: company.location.lng
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
       }
     });
   };
@@ -158960,8 +158949,8 @@ console.log(user);
 var company = new Company_1.Company();
 console.log(company);
 var customMap = new CustomMap_1.CustomMap('map');
-customMap.addUserMarker(user);
-customMap.addCompanyMarker(company); // >parcel index.html
+customMap.addMarker(user);
+customMap.addMarker(company); // >parcel index.html
 // Maps class 
 // constructor(mapDiv: HTMLElement, opts?: google.maps.MapOptions)
 // ? is optional argument

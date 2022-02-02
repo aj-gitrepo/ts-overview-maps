@@ -16,27 +16,28 @@ export class CustomMap {
     });
   }
 
-  // Bad code
-  // because the code in two functions are similar
-  addUserMarker(user: User): void {
+  // little bad code
+  // in case if there are many classes like user and company
+  // it may result in a big or statement
+  addMarker(mappable: User | Company): void { //(mappable: User | Company) - only the variables common in both the given types, here position
     new google.maps.Marker({
       map: this.googleMap, //on which map to mark
       position: {
-        lat: user.location.lat,
-        lng: user.location.lng
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
       }
     });
   };
 
-  addCompanyMarker(company: Company): void {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: company.location.lat,
-        lng: company.location.lng
-      }
-    });
-  };
+  // addCompanyMarker(company: Company): void {
+  //   new google.maps.Marker({
+  //     map: this.googleMap,
+  //     position: {
+  //       lat: company.location.lat,
+  //       lng: company.location.lng
+  //     }
+  //   });
+  // };
 
 }
 
