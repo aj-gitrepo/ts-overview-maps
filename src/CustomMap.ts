@@ -24,12 +24,20 @@ export class CustomMap {
 
   // good code - using interface
   addMarker(mappable: Mappable): void {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap, //on which map to mark
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    });
+
+    marker.addListener('click', () => {
+      const infoWindow = new google.maps.InfoWindow({ //InfoWindow is a  class
+        content: 'Hi There!'
+      });
+
+      infoWindow.open(this.googleMap, marker);
     });
   };
 }
@@ -54,3 +62,12 @@ export class CustomMap {
 // of an object, but we can also use a class or a variable 
 // that refers to a class, which is what user and company 
 // are to refer to that type as well-to specify type of variable.
+
+// infoWindow?: google.maps.InfoWindow|null
+// class InfoWindow extends google.maps.MVCObject {
+    //  constructor(opts?: google.maps.InfoWindowOptions|null);
+
+    // open(
+    //   options?: google.maps.InfoWindowOpenOptions|null|google.maps.Map|
+    //   google.maps.StreetViewPanorama,
+    //   anchor?: google.maps.MVCObject|null): void;

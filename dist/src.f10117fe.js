@@ -158898,12 +158898,20 @@ function () {
 
 
   CustomMap.prototype.addMarker = function (mappable) {
-    new google.maps.Marker({
+    var _this = this;
+
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    });
+    marker.addListener('click', function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: 'Hi There!'
+      });
+      infoWindow.open(_this.googleMap, marker);
     });
   };
 
@@ -158928,6 +158936,13 @@ exports.CustomMap = CustomMap; // Maps class
 // of an object, but we can also use a class or a variable 
 // that refers to a class, which is what user and company 
 // are to refer to that type as well-to specify type of variable.
+// infoWindow?: google.maps.InfoWindow|null
+// class InfoWindow extends google.maps.MVCObject {
+//  constructor(opts?: google.maps.InfoWindowOptions|null);
+// open(
+//   options?: google.maps.InfoWindowOpenOptions|null|google.maps.Map|
+//   google.maps.StreetViewPanorama,
+//   anchor?: google.maps.MVCObject|null): void;
 },{}],"src/index.ts":[function(require,module,exports) {
 "use strict"; /// <reference types="@types/google.maps" />
 
