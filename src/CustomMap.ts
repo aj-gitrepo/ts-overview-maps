@@ -1,16 +1,18 @@
 // Instruction to every other class on how hey can be
 // an argument to 'addMarker'
-interface Mappable {
+export interface Mappable {
   location: {
     lat: number;
     lng: number;
   };
 
   markerContent(): string;
+  color: string;
 }
 
 export class CustomMap {
   // declaring variables
+  // private so that nobody messes with its actual functions
   private googleMap: google.maps.Map; //default modifier public
 
   constructor(divId: string) {

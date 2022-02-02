@@ -1,6 +1,7 @@
 import faker from "@faker-js/faker";
+import { Mappable } from "./CustomMap";
 
-export class Company {
+export class Company implements Mappable {
   // declaring variables
   companyName: string;
   catchPhrase: string;
@@ -8,6 +9,8 @@ export class Company {
     lat: number;
     lng: number;
   };
+
+  color: string = 'yellow';
   
   // initializing variables
   constructor() {

@@ -158829,6 +158829,7 @@ var User =
 function () {
   // initializing variables
   function User() {
+    this.color = 'red';
     this.name = faker_1.default.name.firstName();
     this.location = {
       lat: parseFloat(faker_1.default.address.latitude()),
@@ -158866,6 +158867,7 @@ var Company =
 function () {
   // initializing variables
   function Company() {
+    this.color = 'yellow';
     this.companyName = faker_1.default.company.companyName();
     this.catchPhrase = faker_1.default.company.catchPhrase();
     this.location = {
