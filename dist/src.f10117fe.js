@@ -158829,12 +158829,17 @@ var User =
 function () {
   // initializing variables
   function User() {
+    this.color = 'red';
     this.name = faker_1.default.name.firstName();
     this.location = {
       lat: parseFloat(faker_1.default.address.latitude()),
       lng: parseFloat(faker_1.default.address.longitude())
     };
   }
+
+  User.prototype.markerContent = function () {
+    return "User name is ".concat(this.name);
+  };
 
   return User;
 }();
@@ -158862,6 +158867,7 @@ var Company =
 function () {
   // initializing variables
   function Company() {
+    this.color = 'yellow';
     this.companyName = faker_1.default.company.companyName();
     this.catchPhrase = faker_1.default.company.catchPhrase();
     this.location = {
@@ -158870,12 +158876,85 @@ function () {
     };
   }
 
+  Company.prototype.markerContent = function () {
+    return "\n    <div>\n    <h1>Company Name: ".concat(this.companyName, "</h1>\n    <h3>Catchphrase: ").concat(this.catchPhrase, "</h3>\n    </div>\n    ");
+  };
+
   return Company;
 }();
 
 exports.Company = Company;
-},{"@faker-js/faker":"node_modules/@faker-js/faker/index.js"}],"src/index.ts":[function(require,module,exports) {
+},{"@faker-js/faker":"node_modules/@faker-js/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CustomMap = void 0;
+
+var CustomMap =
+/** @class */
+function () {
+  function CustomMap(divId) {
+    // initializing variables
+    this.googleMap = new google.maps.Map(document.getElementById(divId), {
+      zoom: 1,
+      center: {
+        lat: 0,
+        lng: 0
+      }
+    });
+  } // good code - using interface
+
+
+  CustomMap.prototype.addMarker = function (mappable) {
+    var _this = this;
+
+    var marker = new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
+      }
+    });
+    marker.addListener('click', function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: mappable.markerContent()
+      });
+      infoWindow.open(_this.googleMap, marker);
+    });
+  };
+
+  ;
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap; // Maps class 
+// constructor(mapDiv: HTMLElement, opts?: google.maps.MapOptions)
+// ? is optional argument
+// To restrict the use of other function of map than what is 
+// required in this app a custom map app is created by 
+// extending to google Map class
+// class Marker extends google.maps.MVCObject {
+//   constructor(opts?: google.maps.MarkerOptions|null);
+// MarkerOptions is an interface
+// options we'll be using are,
+// map?: google.maps.Map|null|google.maps.StreetViewPanorama;
+// position?: google.maps.LatLng|null|google.maps.LatLngLiteral;
+// In typescript, classes kind of have like a dual nature, 
+// when we make a class, we can use it to create an instance 
+// of an object, but we can also use a class or a variable 
+// that refers to a class, which is what user and company 
+// are to refer to that type as well-to specify type of variable.
+// infoWindow?: google.maps.InfoWindow|null
+// class InfoWindow extends google.maps.MVCObject {
+//  constructor(opts?: google.maps.InfoWindowOptions|null);
+// open(
+//   options?: google.maps.InfoWindowOpenOptions|null|google.maps.Map|
+//   google.maps.StreetViewPanorama,
+//   anchor?: google.maps.MVCObject|null): void;
+},{}],"src/index.ts":[function(require,module,exports) {
+"use strict"; /// <reference types="@types/google.maps" />
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -158883,14 +158962,25 @@ Object.defineProperty(exports, "__esModule", {
 
 var User_1 = require("./User");
 
-var Company_1 = require("./Company"); // console.log('hi there');
+var Company_1 = require("./Company");
+
+var CustomMap_1 = require("./CustomMap"); // console.log('hi there');
 
 
 var user = new User_1.User();
 console.log(user);
 var company = new Company_1.Company();
-console.log(company); // >parcel index.html
-},{"./User":"src/User.ts","./Company":"src/Company.ts"}],"../../../../Users/DIVYA JAYACHANDRAN/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+console.log(company);
+var customMap = new CustomMap_1.CustomMap('map');
+customMap.addMarker(user);
+customMap.addMarker(company); // >parcel index.html
+// Maps class 
+// constructor(mapDiv: HTMLElement, opts?: google.maps.MapOptions)
+// ? is optional argument
+// To restrict the use of other function of map than what is 
+// required in this app a custom map app is created by 
+// extending to google Map class
+},{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"../../../../Users/DIVYA JAYACHANDRAN/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -158918,7 +159008,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54435" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50629" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

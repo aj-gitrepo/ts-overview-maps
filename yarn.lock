@@ -14,6 +14,11 @@
   dependencies:
     faker "*"
 
+"@types/google.maps@^3.47.3":
+  version "3.47.3"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.47.3.tgz#36ec9cfb421ef8db11ba7337e006143dbd374522"
+  integrity sha512-BF/BzpO0LWiwR/bBoGVriy7e2n+syuGNQMQ0r/+GtisUcgKn9P7Z4rmLNmZko9niE8JJ5dpMkxHeen7gADlNaw==
+
 faker@*:
   version "6.6.6"
   resolved "https://registry.yarnpkg.com/faker/-/faker-6.6.6.tgz#e9529da0109dca4c7c5dbfeaadbd9234af943033"
