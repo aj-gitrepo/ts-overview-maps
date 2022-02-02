@@ -158894,8 +158894,33 @@ function () {
         lng: 0
       }
     });
-  }
+  } // Bad code
+  // because the code in two functions are similar
 
+
+  CustomMap.prototype.addUserMarker = function (user) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: user.location.lat,
+        lng: user.location.lng
+      }
+    });
+  };
+
+  ;
+
+  CustomMap.prototype.addCompanyMarker = function (company) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: company.location.lat,
+        lng: company.location.lng
+      }
+    });
+  };
+
+  ;
   return CustomMap;
 }();
 
@@ -158905,6 +158930,17 @@ exports.CustomMap = CustomMap; // Maps class
 // To restrict the use of other function of map than what is 
 // required in this app a custom map app is created by 
 // extending to google Map class
+// class Marker extends google.maps.MVCObject {
+//   constructor(opts?: google.maps.MarkerOptions|null);
+// MarkerOptions is an interface
+// options we'll be using are,
+// map?: google.maps.Map|null|google.maps.StreetViewPanorama;
+// position?: google.maps.LatLng|null|google.maps.LatLngLiteral;
+// In typescript, classes kind of have like a dual nature, 
+// when we make a class, we can use it to create an instance 
+// of an object, but we can also use a class or a variable 
+// that refers to a class, which is what user and company 
+// are to refer to that type as well-to specify type of variable.
 },{}],"src/index.ts":[function(require,module,exports) {
 "use strict"; /// <reference types="@types/google.maps" />
 
@@ -158923,7 +158959,9 @@ var user = new User_1.User();
 console.log(user);
 var company = new Company_1.Company();
 console.log(company);
-new CustomMap_1.CustomMap('map'); // >parcel index.html
+var customMap = new CustomMap_1.CustomMap('map');
+customMap.addUserMarker(user);
+customMap.addCompanyMarker(company); // >parcel index.html
 // Maps class 
 // constructor(mapDiv: HTMLElement, opts?: google.maps.MapOptions)
 // ? is optional argument
